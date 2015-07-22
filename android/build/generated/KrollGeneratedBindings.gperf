@@ -1,0 +1,18 @@
+%define lookup-function-name lookupGeneratedInit
+%define class-name SwipetorefreshBindings
+%{
+
+#include <string.h>
+#include <v8.h>
+#include <KrollBindings.h>
+
+#include "br.com.leoleal.swipetorefresh.SwipeToRefreshProxy.h"
+#include "br.com.leoleal.swipetorefresh.SwipetorefreshModule.h"
+
+
+%}
+struct titanium::bindings::BindEntry;
+%%
+br.com.leoleal.swipetorefresh.SwipeToRefreshProxy, ::br::com::leoleal::swipetorefresh::swipetorefresh::SwipeToRefreshProxy::bindProxy, ::br::com::leoleal::swipetorefresh::swipetorefresh::SwipeToRefreshProxy::dispose
+br.com.leoleal.swipetorefresh.SwipetorefreshModule, ::br::com::leoleal::swipetorefresh::SwipetorefreshModule::bindProxy, ::br::com::leoleal::swipetorefresh::SwipetorefreshModule::dispose
+%%
