@@ -1,5 +1,5 @@
-Ti.SwipeRefreshLayout Titanium Module
-===========================================
+Android's SwipeRefreshLayout Module for Appcelerator
+====================================================
 
 This is a module based on iskugor's fork, because SwipeRefreshLayout on latest appcelerator sdk cant touch main thread views inside a module.
 
