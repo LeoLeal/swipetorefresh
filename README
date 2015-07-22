@@ -1,106 +1,76 @@
-Appcelerator Titanium Mobile Module Project
+Ti.SwipeRefreshLayout Titanium Module
 ===========================================
 
-This is a skeleton Titanium Mobile Mobile module project.
+This is a module based on iskugor's fork, because SwipeRefreshLayout on latest appcelerator sdk cant touch main thread views inside a module.
 
+Building the module
+-----------
+You'll need to modify "build.xml" and ".classpath" according to paths on your machine.
+	
 
-MODULE NAMING
--------------
+To initialize
+-----------
+The initialization of the module requires a handle to the scrollable view. If the scrollable view is in xml, you can create a new controller for the scrollable view and then pass it in as the view.
 
-Choose a unique module id for your module.  This ID usually follows a namespace
-convention using DNS notation.  For example, com.appcelerator.module.test.  This
-ID can only be used once by all public modules in Titanium.
+	var myListView = Ti.UI.createListView({
+		height: Ti.UI.FILL,
+		width: Ti.UI.FILL
+	})
 
+	var swipeRefreshModule = require('com.rkam.swiperefreshlayout');
+	var swipeRefresh = swipeRefreshModule.createSwipeRefresh({
+		view: myListView,
+		height: Ti.UI.FILL,
+		width: Ti.UI.FILL
+	});
 
-GET STARTED
-------------
+	$.content.add(swipeRefresh);
 
-1. Edit manifest with the appropriate details about your module.
-2. Edit LICENSE to add your license details.
-3. Place any assets (such as PNG files) that are required anywhere in the module folder.
-4. Edit the timodule.json and configure desired settings.
-5. Code and build.
+Setting color scheme
+-----------
+If you want to modify the 4 colours used in the progress bars at the top, modify the colors.xml file in (module folder)/platform/android/res/values which looks like this.
 
+	<?xml version="1.0" encoding="utf-8"?>
+	<resources>
+		<!-- Declare SwipeRefreshLayout color scheme here -->
+		<color name="color1">#1996BE</color>
+		<color name="color2">#48B6D9</color>
+		<color name="color3">#80D3ED</color>
+		<color name="color4">#C2F0FF</color>
+	</resources>
 
-DOCUMENTATION FOR YOUR MODULE
------------------------------
+Adding the event listener for when refresh happens
+-----------
+A refreshing event is fired when the swipe gesture is completed.
 
-You should provide at least minimal documentation for your module in `documentation` folder using the Markdown syntax.
+	swipeRefresh.addEventListener('refreshing', function() {
 
-For more information on the Markdown syntax, refer to this documentation at:
+		// Put your refresh code here
+	
+	});
 
-<http://daringfireball.net/projects/markdown/>
+Set refreshing
+-----------
+Used to stop the progress bar animation when refreshing is done.
 
+	swipeRefresh.setRefreshing(false);
 
-TEST HARNESS EXAMPLE FOR YOUR MODULE
-------------------------------------
+Check if refreshing
+-----------
+The state of the SwipeRefreshLayout, whether the animation is showing or not.
 
-The `example` directory contains a skeleton application test harness that can be
-used for testing and providing an example of usage to the users of your module.
+	var isRefreshing = swipeRefresh.isRefreshing();
 
+Alloy
+-----------
+Alloy usage example:
 
-BUILDING YOUR MODULE
---------------------
-
-Simply run `titanium build --platform <name of platform> --build-type production --dir /path/to/module`.
-You can omit the --dir option if your working directory is in the module's project directory.
-
-
-INSTALL YOUR MODULE
--------------------
-
-Mac OS X
---------
-Copy the distribution zip file into the `~/Library/Application Support/Titanium` folder
-
-Linux
------
-Copy the distribution zip file into the `~/.titanium` folder
-
-Windows
--------
-Copy the distribution zip file into the `C:\ProgramData\Titanium` folder
-
-
-REGISTER YOUR MODULE
---------------------
-
-Register your module with your application by editing `tiapp.xml` and adding your module.
-Example:
-
-<modules>
-	<module version="0.1">br.com.leoleal.swipetorefresh</module>
-</modules>
-
-When you run your project, the compiler will combine your module along with its dependencies
-and assets into the application.
-
-
-USING YOUR MODULE IN CODE
--------------------------
-
-To use your module in code, you will need to require it.
-
-For example,
-
-	var my_module = require('br.com.leoleal.swipetorefresh');
-	my_module.foo();
-
-
-TESTING YOUR MODULE
--------------------
-
-To test with the script, execute:
-
-	titanium run --dir=YOURMODULEDIR
-
-This will execute the app.js in the example folder as a Titanium application.
-
-
-DISTRIBUTING YOUR MODULE
--------------------------
-
-You can choose to manually distribute your module distribution zip file or through the Titanium Marketplace!
-
-
-Cheers!
+	<Alloy>
+		<Window>
+			<SwipeRefresh module="com.rkam.swiperefreshlayout">
+				<ListView>
+					<!-- listview tags -->
+				</ListView>
+			</SwipeRefresh>
+		</Window>
+	</Alloy>
