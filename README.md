@@ -17,14 +17,14 @@ The initialization of the module requires a handle to the scrollable view. If th
 		width: Ti.UI.FILL
 	})
 
-	var swipeRefreshModule = require('com.rkam.swiperefreshlayout');
-	var swipeRefresh = swipeRefreshModule.createSwipeRefresh({
+	var swipeToRefreshModule = require('br.com.leoleal.swipetorefresh');
+	var swipeToRefresh = swipeToRefreshModule.createSwipeToRefresh({
 		view: myListView,
 		height: Ti.UI.FILL,
 		width: Ti.UI.FILL
 	});
 
-	$.content.add(swipeRefresh);
+	$.content.add(swipeToRefresh);
 
 Setting color scheme
 -----------
@@ -53,13 +53,13 @@ Set refreshing
 -----------
 Used to stop the progress bar animation when refreshing is done.
 
-	swipeRefresh.setRefreshing(false);
+	swipeToRefresh.setRefreshing(false);
 
 Check if refreshing
 -----------
 The state of the SwipeRefreshLayout, whether the animation is showing or not.
 
-	var isRefreshing = swipeRefresh.isRefreshing();
+	var isRefreshing = swipeToRefresh.isRefreshing();
 
 Alloy
 -----------
@@ -67,10 +67,10 @@ Alloy usage example:
 
 	<Alloy>
 		<Window>
-			<SwipeRefresh module="com.rkam.swiperefreshlayout">
+			<SwipeToRefresh module="br.com.leoleal.swipetorefresh">
 				<ListView>
 					<!-- listview tags -->
 				</ListView>
-			</SwipeRefresh>
+			</SwipeToRefresh>
 		</Window>
 	</Alloy>
